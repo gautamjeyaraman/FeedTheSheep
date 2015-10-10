@@ -9,12 +9,12 @@ var ctx = canvas.getContext("2d"),
 foreground.onload = initload;
 foreground.src = "/static/images/foreground.png";
 
-background.onload = setup;
-background.src = "/static/images/background.png"
-
 function initload(){
   ctx.fillStyle = ctx.createPattern(foreground, "repeat");
   ctx.fillRect(0,0,900,500);
+  drawObstacles();
+  background.onload = setup;
+  background.src = "/static/images/background.png"
 }
 function setup() {
   
@@ -31,7 +31,6 @@ function setup() {
   }
   // for demo only, reveals image while mousing over canvas with click
   canvas.onmousemove = function(e) {
-    
     if(mouseDown == 1){
       var r = this.getBoundingClientRect(),
       x = e.clientX - r.left,
@@ -85,5 +84,3 @@ var obstacles = [
   {"circle": {"radius": 50, "center": {"x": 600, "y": 350}}},
   {"box": {"x": 800, "y": 30, "length": 100, "width": 50}}
 ]
-
-drawObstacles();
