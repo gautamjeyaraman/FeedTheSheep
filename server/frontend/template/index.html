@@ -13,6 +13,7 @@
     <!-- Bootstrap core CSS -->
     <link href="/static/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="/static/bootstrap/jquery-ui.css" rel="stylesheet">
+    <link href="/static/bootstrap/gamify.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="/static/bootstrap/base.css" rel="stylesheet">
@@ -20,8 +21,11 @@
     <style type="text/css" id="holderjs-style"></style>
   </head>
 
-  <body style="font-size: 20px;">
-
+  <body style="font-size: 20px;" >
+    <div id="welcome_page" class="show home_page_image">
+      <a href="javascript:void(0);" onclick="javascrpt:start_game();" class="start_button">Start</a>
+    </div>
+    <div id="game_starts" class="hide game_page">
     <div class="blog-masthead">
       <div class="container">
         <nav class="blog-nav">
@@ -33,7 +37,7 @@
       <div class="blog-header">
         <div class="row">
           
-          <div id="game" style="height:500px;width:900px;float:left;margin-left:-105px;">
+          <div id="game" class="canvas_wrapper">
 	  <div id="draggable" class="draggable ui-widget ui-widget-content">
 	  <img src="/static/images/sheep123.png" id="sheep"/>
 	  </div>
@@ -45,6 +49,7 @@
     </div><!-- /.container -->
 	<input type="button" value="Reload" id="reload" > 
 
+    </div><!-- game_starts -->
     
     
 
@@ -58,6 +63,7 @@
     <script src="/static/underscore.js"></script>
     <script src="/static/base.js"></script>
     <script src="/static/jquery-ui.js"></script>
+    <script src="/static/firstpage.js"></script>
     
   
  </body>
