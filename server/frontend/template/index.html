@@ -24,8 +24,6 @@
 
   <body style="font-size: 20px;">
 
-    <button id="b01">Play "beer_can_opening"</button>
-    <button id="b02">Play "bell_ring"</button>
     <div id="welcome_page" class="show home_page_image">
       <a href="javascript:void(0);" onclick="javascrpt:start_game();" class="start_button">Start</a>
     </div>
@@ -41,18 +39,18 @@
     <div class="container-fluid">
       <div class="blog-header">
         <div class="row">
-          
-          <div id="game" class="canvas_wrapper">
+          <div id="game" class="col-xs-12 col-md-8 canvas_wrapper">
 	  <div id="draggable" class="draggable ui-widget ui-widget-content">
 	  <img src="/static/images/sheep123.png" id="sheep"/>
 	  </div>
             <canvas id="canvas" width=900 height=500></canvas>
           </div>
+          <div id="score" class="col-xs-6 col-md-4">Score: 0</div>
 
         </div><!-- /.row -->
       </div><!-- /.blog-header -->
     </div><!-- /.container -->
-	<input type="button" value="Reload" id="reload" > 
+	<!--<input type="button" value="Reload" id="reload" >  -->
 
     </div><!-- game_starts -->
     
