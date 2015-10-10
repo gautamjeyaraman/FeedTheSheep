@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/static/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="/static/bootstrap/jquery-ui.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="/static/bootstrap/base.css" rel="stylesheet">
@@ -28,18 +29,21 @@
       </div>
     </div>
 
-    
     <div class="container-fluid">
       <div class="blog-header">
         <div class="row">
           
-          <div id="game" style="height:900px;width:500px;float:left;margin-left:-105px;">
+          <div id="game" style="height:500px;width:900px;float:left;margin-left:-105px;">
+	  <div id="draggable" class="draggable ui-widget ui-widget-content">
+	  <img src="/static/images/sheep123.png" id="sheep"/>
+	  </div>
             <canvas id="canvas" width=900 height=500></canvas>
           </div>
 
         </div><!-- /.row -->
       </div><!-- /.blog-header -->
     </div><!-- /.container -->
+	<input type="button" value="Reload" id="reload" > 
 
     
     
@@ -53,6 +57,7 @@
     <script src="/static/bootstrap/bootstrap.js"></script>
     <script src="/static/underscore.js"></script>
     <script src="/static/base.js"></script>
+    <script src="/static/jquery-ui.js"></script>
     
   
  </body>

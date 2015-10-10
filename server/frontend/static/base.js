@@ -5,6 +5,7 @@ var ctx = canvas.getContext("2d"),
     foreground = new Image,
     background = new Image,
     radius = 40;
+    var counts = 0;
 
 foreground.onload = initload;
 foreground.src = "/static/images/foreground.png";
@@ -22,7 +23,7 @@ function setup() {
   ctx.fillStyle = ctx.createPattern(background, "repeat");
   
 
-  var mouseDown = 0;
+  /*var mouseDown = 0;
   canvas.onmousedown = function() { 
     ++mouseDown;
   }
@@ -42,5 +43,25 @@ function setup() {
       ctx.arc(x, y, radius, 0, 2*Math.PI);
       ctx.fill();
     }
-  };
+  };*/
+$( "#draggable" ).draggable({
+      drag: function(e) {
+        counts++;
+      var r = canvas.getBoundingClientRect(),
+      x = e.clientX - r.left,
+      y = e.clientY - r.top;
+    
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.arc(x, y, radius, 0, 2*Math.PI);
+      ctx.fill();
+      },
+      containment:'#game'
+    });
+  }
+reloadVar = document.getElementById("reload");
+reloadVar.onclick = reload;
+function reload()
+{
+alert(counts);
 }
