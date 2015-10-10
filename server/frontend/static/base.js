@@ -25,13 +25,15 @@ function playSounds(){
     sounds: [
         {name: "beer_can_opening"},
         {name: "bell_ring"},
-        {name: "voice_of_birds"},
+        {name: "voice_of_birds",
+         loop: true
+        },
         {name: "sheep_bleat"}
     ],
     path: "/static/sounds/",
     preload: true,
     volume: 1.5,
-    loop: true
+    
   });
 
 
