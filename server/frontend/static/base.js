@@ -5,26 +5,28 @@ var ctx = canvas.getContext("2d"),
     foreground = new Image,
     background = new Image,
     radius = 40;
+    var counts = 0;
 
 foreground.onload = initload;
 foreground.src = "/static/images/foreground.png";
 
-background.onload = setup;
-background.src = "/static/images/background.png"
-
 function initload(){
   ctx.fillStyle = ctx.createPattern(foreground, "repeat");
   ctx.fillRect(0,0,900,500);
-  $(document).ready(playSounds());
+  drawObstacles();
+  
   //$(document).ready(ion.sound.play("voice_of_birds"));
 }
+$(document).ready(function(){playSounds();});
+
 function playSounds(){
 
   ion.sound({
     sounds: [
         {name: "beer_can_opening"},
         {name: "bell_ring"},
-        {name: "voice_of_birds"}
+        {name: "voice_of_birds"},
+        {name: "sheep_bleat"}
     ],
     path: "/static/sounds/",
     preload: true,
@@ -33,9 +35,14 @@ function playSounds(){
   });
 
 
-  $("#b01").on("click", function(){
-      ion.sound.play("voice_of_birds");
+  $(".start_button").on("click", function(){
+    ion.sound.play("voice_of_birds");    
   });
+
+  $("#sheep").on("click", function(){
+    ion.sound.play("sheep_bleat");
+  });
+  
 }
 function setup() {
   
@@ -43,7 +50,7 @@ function setup() {
   ctx.fillStyle = ctx.createPattern(background, "repeat");
   
 
-  var mouseDown = 0;
+  /*var mouseDown = 0;
   canvas.onmousedown = function() { 
     ++mouseDown;
   }
@@ -52,7 +59,6 @@ function setup() {
   }
   // for demo only, reveals image while mousing over canvas with click
   canvas.onmousemove = function(e) {
-    
     if(mouseDown == 1){
       var r = this.getBoundingClientRect(),
       x = e.clientX - r.left,
@@ -63,9 +69,28 @@ function setup() {
       ctx.arc(x, y, radius, 0, 2*Math.PI);
       ctx.fill();
     }
-  };
+  };*/
+$( "#draggable" ).draggable({
+      drag: function(e) {
+        counts++;
+      var r = canvas.getBoundingClientRect(),
+      x = e.clientX - r.left,
+      y = e.clientY - r.top;
+    
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.arc(x, y, radius, 0, 2*Math.PI);
+      ctx.fill();
+      },
+      containment:'#game'
+    });
+  }
+reloadVar = document.getElementById("reload");
+reloadVar.onclick = reload;
+function reload()
+{
+alert(counts);
 }
-
 
 function drawObstacles(){
   for(var i=0; i<obstacles.length; i++){
@@ -76,6 +101,9 @@ function drawObstacles(){
       drawBox(obstacles[i]);
     }
   }
+
+  background.onload = setup;
+  background.src = "/static/images/background.png"
 }
 
 function drawCircle(obstacle){
@@ -101,11 +129,14 @@ function drawBox(obstacle){
   img.src = "/static/images/obs.png";
 }
 
-var obstacles = [
+
+/*var obstacles = [
   {"circle": {"radius": 10, "center": {"x": 100, "y": 200}}},
   {"circle": {"radius": 50, "center": {"x": 600, "y": 350}}},
   {"box": {"x": 800, "y": 30, "length": 100, "width": 50}}
-]
+]*/
 
-drawObstacles();
-$("#b01").click();
+
+//$("#b01").click();
+
+var obstacles = [{"box": {"y": 409, "width": 15, "length": 63, "x": 176}}, {"circle": {"radius": 23, "center": {"y": 439, "x": 502}}}, {"box": {"y": 271, "width": 148, "length": 57, "x": 364}}, {"circle": {"radius": 78, "center": {"y": 343, "x": 722}}}, {"circle": {"radius": 21, "center": {"y": 310, "x": 454}}}];
