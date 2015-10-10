@@ -3,6 +3,7 @@ from cyclone_server import config
 from twisted.internet import defer
 from cyclone_server.db.mixin import DatabaseMixin
 import cyclone
+import random
 
 class APIBase(cyclone.web.RequestHandler, DatabaseMixin):
 
@@ -34,3 +35,19 @@ class SendPathHandler(APIBase):
         path = yield self.database.insert_path(path, layout_id, distance, area)
 
         defer.returnValue(self.write_json({'success': True}))
+
+
+class LayoutGenerator(APIBase):
+
+    #@defer.inlineCallbacks
+    def get(self, number):
+        number = int(number)
+        for i in range(0, number):
+            shape = random.choice(["circle", "box"])
+            pass
+
+
+
+
+
+

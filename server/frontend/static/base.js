@@ -10,12 +10,10 @@ var ctx = canvas.getContext("2d"),
 foreground.onload = initload;
 foreground.src = "/static/images/foreground.png";
 
-background.onload = setup;
-background.src = "/static/images/background.png"
-
 function initload(){
   ctx.fillStyle = ctx.createPattern(foreground, "repeat");
   ctx.fillRect(0,0,900,500);
+  drawObstacles();
 }
 function setup() {
   
@@ -32,7 +30,6 @@ function setup() {
   }
   // for demo only, reveals image while mousing over canvas with click
   canvas.onmousemove = function(e) {
-    
     if(mouseDown == 1){
       var r = this.getBoundingClientRect(),
       x = e.clientX - r.left,
@@ -65,3 +62,47 @@ function reload()
 {
 alert(counts);
 }
+
+function drawObstacles(){
+  for(var i=0; i<obstacles.length; i++){
+    if(_.has(obstacles[i], "circle")){
+      drawCircle(obstacles[i]);
+    }
+    if(_.has(obstacles[i], "box")){
+      drawBox(obstacles[i]);
+    }
+  }
+
+  background.onload = setup;
+  background.src = "/static/images/background.png"
+}
+
+function drawCircle(obstacle){
+  obstacle = obstacle.circle;
+  var img = new Image;
+  img.onload = function(){
+    ctx.fillStyle = ctx.createPattern(img, "repeat");
+    ctx.beginPath();
+    ctx.moveTo(obstacle.center.x + radius, obstacle.center.y);
+    ctx.arc(obstacle.center.x, obstacle.center.y, obstacle.radius, 0, 2*Math.PI);
+    ctx.fill();
+  }
+  img.src = "/static/images/obs.png";
+}
+
+function drawBox(obstacle){
+  obstacle = obstacle.box;
+  var img = new Image;
+  img.onload = function(){
+    ctx.fillStyle = ctx.createPattern(img, "repeat");
+    ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.length);
+  }
+  img.src = "/static/images/obs.png";
+}
+
+
+var obstacles = [
+  {"circle": {"radius": 10, "center": {"x": 100, "y": 200}}},
+  {"circle": {"radius": 50, "center": {"x": 600, "y": 350}}},
+  {"box": {"x": 800, "y": 30, "length": 100, "width": 50}}
+]

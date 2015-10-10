@@ -17,5 +17,6 @@ routes = munge_route_list([
     URLSpec(r'/', views.IndexHandler, name='home'),
     URLSpec(r'/stats', views.StatsHandler, name="stats"),
     
-    URLSpec(r'/api/latest/path', api.SendPathHandler)
+    URLSpec(r'/api/latest/path', api.SendPathHandler),
+    URLSpec(r'/api/latest/genlayout/(.*)', api.LayoutGenerator)
 ])
