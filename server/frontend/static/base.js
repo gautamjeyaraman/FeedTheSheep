@@ -1,6 +1,8 @@
 
 //CODE FOR THE GAME IN THE MAIN PAGE
 
+var path = [];
+
 var ctx = canvas.getContext("2d"),
     foreground = new Image,
     background = new Image,
@@ -115,6 +117,8 @@ $( "#draggable" ).draggable({
 	    if(dx*dx+dy*dy<=(radius*radius)){return false;}
 	}
       }
+
+      path.push([Math.floor(x),Math.floor(y)]);
     
       ctx.beginPath();
       ctx.moveTo(x + radius, y);
@@ -128,7 +132,7 @@ reloadVar = document.getElementById("reload");
 reloadVar.onclick = reload;
 function reload()
 {
-alert(counts);
+    //The data to be posted is path;
 }
 
 function drawObstacles(){
