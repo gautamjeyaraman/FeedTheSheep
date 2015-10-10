@@ -131,6 +131,7 @@ function reload()
 alert(counts);
 }
 
+var done = 0;
 function drawObstacles(){
   for(var i=0; i<obstacles.length; i++){
     if(_.has(obstacles[i], "circle")){
@@ -141,8 +142,6 @@ function drawObstacles(){
     }
   }
 
-  background.onload = setup;
-  background.src = "/static/images/background.png"
 }
 
 function drawCircle(obstacle){
@@ -154,6 +153,11 @@ function drawCircle(obstacle){
     ctx.moveTo(obstacle.center.x + radius, obstacle.center.y);
     ctx.arc(obstacle.center.x, obstacle.center.y, obstacle.radius, 0, 2*Math.PI);
     ctx.fill();
+    done += 1;
+    if(done > 1){
+      background.onload = setup;
+      background.src = "/static/images/background.png"
+    }
   }
   img.src = "/static/images/obs.png";
 }
@@ -164,6 +168,11 @@ function drawBox(obstacle){
   img.onload = function(){
     ctx.fillStyle = ctx.createPattern(img, "repeat");
     ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.length);
+    done += 1;
+    if(done > 1){
+      background.onload = setup;
+      background.src = "/static/images/background.png"
+    }
   }
   img.src = "/static/images/obs.png";
 }
