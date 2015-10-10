@@ -101,8 +101,10 @@ function drawBox(obstacle){
 }
 
 
-var obstacles = [
+/*var obstacles = [
   {"circle": {"radius": 10, "center": {"x": 100, "y": 200}}},
   {"circle": {"radius": 50, "center": {"x": 600, "y": 350}}},
   {"box": {"x": 800, "y": 30, "length": 100, "width": 50}}
-]
+]*/
+
+var obstacles = [{"box": {"y": 409, "width": 15, "length": 63, "x": 176}}, {"circle": {"radius": 23, "center": {"y": 439, "x": 502}}}, {"box": {"y": 271, "width": 148, "length": 57, "x": 364}}, {"circle": {"radius": 78, "center": {"y": 343, "x": 722}}}, {"circle": {"radius": 21, "center": {"y": 310, "x": 454}}}];
