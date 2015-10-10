@@ -37,6 +37,16 @@ class SendPathHandler(APIBase):
         defer.returnValue(self.write_json({'success': True}))
 
 
+class LayoutHandler(APIBase):
+
+    @defer.inlineCallbacks
+    def get(self, number):
+        layout = yield self.database.get_layout(number)
+        layout = layout[0][0]
+        print layout
+        defer.returnValue(self.write_json({"layout": layout}))
+
+
 class LayoutGenerator(APIBase):
 
     @defer.inlineCallbacks
