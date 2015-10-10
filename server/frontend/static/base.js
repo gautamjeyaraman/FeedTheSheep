@@ -15,6 +15,27 @@ background.src = "/static/images/background.png"
 function initload(){
   ctx.fillStyle = ctx.createPattern(foreground, "repeat");
   ctx.fillRect(0,0,900,500);
+  $(document).ready(playSounds());
+  //$(document).ready(ion.sound.play("voice_of_birds"));
+}
+function playSounds(){
+
+  ion.sound({
+    sounds: [
+        {name: "beer_can_opening"},
+        {name: "bell_ring"},
+        {name: "voice_of_birds"}
+    ],
+    path: "/static/sounds/",
+    preload: true,
+    volume: 1.5,
+    loop: true
+  });
+
+
+  $("#b01").on("click", function(){
+      ion.sound.play("voice_of_birds");
+  });
 }
 function setup() {
   
@@ -87,3 +108,4 @@ var obstacles = [
 ]
 
 drawObstacles();
+$("#b01").click();
