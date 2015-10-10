@@ -1,9 +1,13 @@
 import cyclone.web
+from twisted.internet import defer
+from cyclone_server.db.mixin import DatabaseMixin
 
-class IndexHandler(cyclone.web.RequestHandler):
 
+class IndexHandler(cyclone.web.RequestHandler, DatabaseMixin):
+    @defer.inlineCallbacks
     def get(self):
-        self.render("index.html")
+    	_ids = yield self.database.get_all_layouts()
+        self.render("index.html", _ids=_ids)
         
         
 class StatsHandler(cyclone.web.RequestHandler):

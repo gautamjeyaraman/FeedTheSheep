@@ -7,8 +7,10 @@ var ctx = canvas.getContext("2d"),
     radius = 40;
     var counts = 0;
 
-foreground.onload = initload;
-foreground.src = "/static/images/foreground.png";
+function initFunc(){
+  foreground.onload = initload;
+  foreground.src = "/static/images/foreground.png";
+}
 
 function initload(){
   ctx.fillStyle = ctx.createPattern(foreground, "repeat");
@@ -64,12 +66,12 @@ alert(counts);
 }
 
 function drawObstacles(){
-  for(var i=0; i<obstacles.length; i++){
-    if(_.has(obstacles[i], "circle")){
-      drawCircle(obstacles[i]);
+  for(var i=0; i<window.obstacles.length; i++){
+    if(_.has(window.obstacles[i], "circle")){
+      drawCircle(window.obstacles[i]);
     }
-    if(_.has(obstacles[i], "box")){
-      drawBox(obstacles[i]);
+    if(_.has(window.obstacles[i], "box")){
+      drawBox(window.obstacles[i]);
     }
   }
 
@@ -107,4 +109,4 @@ function drawBox(obstacle){
   {"box": {"x": 800, "y": 30, "length": 100, "width": 50}}
 ]*/
 
-var obstacles = [{"box": {"y": 409, "width": 15, "length": 63, "x": 176}}, {"circle": {"radius": 23, "center": {"y": 439, "x": 502}}}, {"box": {"y": 271, "width": 148, "length": 57, "x": 364}}, {"circle": {"radius": 78, "center": {"y": 343, "x": 722}}}, {"circle": {"radius": 21, "center": {"y": 310, "x": 454}}}];
+//var obstacles = [{"box": {"y": 409, "width": 15, "length": 63, "x": 176}}, {"circle": {"radius": 23, "center": {"y": 439, "x": 502}}}, {"box": {"y": 271, "width": 148, "length": 57, "x": 364}}, {"circle": {"radius": 78, "center": {"y": 343, "x": 722}}}, {"circle": {"radius": 21, "center": {"y": 310, "x": 454}}}];

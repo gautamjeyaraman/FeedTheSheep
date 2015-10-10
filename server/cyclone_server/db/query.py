@@ -10,3 +10,9 @@ _INSERT_LAYOUT =\
 
 _RM_LAYOUT =\
 	'DELETE FROM layout RETURNING *;'
+
+_GET_ALL_LAYOUT_IDS =\
+	'SELECT id FROM layout;'
+
+_GET_LAYOUT =\
+	'SELECT layout FROM layout WHERE id=%s;'
