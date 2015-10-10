@@ -21,8 +21,8 @@ function setup() {
   ctx.fillStyle = ctx.createPattern(background, "repeat");
   
 
-  /*var mouseDown = 0;
-  canvas.onmousedown = function() { 
+  var mouseDown = 0;
+  /*canvas.onmousedown = function() { 
     ++mouseDown;
   }
   canvas.onmouseup = function() {
@@ -41,18 +41,55 @@ function setup() {
       ctx.fill();
     }
   };*/
+$( "#draggable" ).mousedown(function(){
+	mouseDown = 1;
+});
+$( "#draggable" ).mouseup(function(){
+	mouseDown = 0;
+});
 $( "#draggable" ).draggable({
       drag: function(e) {
+	if(mouseDown == 1)
+	{
         counts++;
       var r = canvas.getBoundingClientRect(),
       x = e.clientX - r.left,
       y = e.clientY - r.top;
+      for(var i=0;i<obstacles.length;i++)
+      {
+      	if(_.has(obstacles[i], "circle")){
+		obstacle = obstacles[i].circle;
+		var distance = Math.sqrt(Math.pow(obstacle.center.x - x,2) + Math.pow(obstacle.center.y - y,2));
+		var minimumDistance = obstacle.radius + radius;
+		if(distance < minimumDistance)
+		{
+			return false;
+		}
+	}
+	if(_.has(obstacles[i], "box")){
+	    obstacle = obstacles[i].box;
+
+	    var distX = Math.abs(x - obstacle.x-obstacle.width/2);
+	    var distY = Math.abs(y - obstacle.y-obstacle.length/2);
+
+	    if (distX > (obstacle.width/2 + radius)) { continue; }
+	    if (distY > (obstacle.length/2 + radius)) { continue; }
+
+
+	    if (distX <= (obstacle.width/2)) { return false; } 
+	    if (distY <= (obstacle.length/2)) { return false; }
+
+	    var dx=distX-obstacle.width/2;
+	    var dy=distY-obstacle.length/2;
+	    if(dx*dx+dy*dy<=(radius*radius)){return false;}
+	}
+      }
     
       ctx.beginPath();
       ctx.moveTo(x + radius, y);
       ctx.arc(x, y, radius, 0, 2*Math.PI);
       ctx.fill();
-      },
+      }},
       containment:'#game'
     });
   }
