@@ -6,6 +6,7 @@ function start_game(_id){
               	if(res.success)
               	{
                 window.distance = res.distance;
+                window.area = res.area;
                 console.log(res.distance);
             }
               });
