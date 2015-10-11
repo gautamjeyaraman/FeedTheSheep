@@ -1,6 +1,6 @@
 # Sheep Intelligence
 
-# How to play the game
+## How to play the game
 ###Choose a layout
 ![alt text](https://github.com/gautamjeyaraman/FeedTheSheep/tree/master/screen_shots/1.png "Layout Select")
 -You can choose the layout you want to explore from this page.
@@ -26,7 +26,7 @@ If its the same we consider the distance you have travelled
 - We believe you can get bored of the level, so you can go back to Main Menu and select another one
 
 
-# Solutions page
+## Solutions page
 ######**Hurray!!! You have successfully played a game and helped solve a real time problem.**
 ![alt text](https://github.com/gautamjeyaraman/FeedTheSheep/tree/master/screen_shots/4.png "Layout Select for Solutions")
 - You can select the layout and find the best solution
