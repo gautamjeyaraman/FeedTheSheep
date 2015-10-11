@@ -20,9 +20,11 @@ var ctx = canvas.getContext("2d"),
 
 var area_without_obstacles = 0;
 var hidden_ctx = hidden_canvas.getContext("2d"),radius = 40;
+function initFunc(){
+  foreground.onload = initload;
+  foreground.src = "/static/images/foreground.png";
+}
 
-foreground.onload = initload;
-foreground.src = "/static/images/foreground.png";
 
 function initload(){
   ctx.fillStyle = ctx.createPattern(foreground, "repeat");
@@ -94,6 +96,7 @@ function setup() {
   };*/
 $( "#draggable" ).mousedown(function(){
 	mouseDown = 1;
+
 });
 $( "#draggable" ).mouseup(function(){
 	mouseDown = 0;
@@ -102,7 +105,8 @@ $( "#draggable" ).draggable({
       drag: function(e) {
 	if(mouseDown == 1)
 	{
-        counts++;
+      counts++;
+      document.getElementById("score").innerHTML= "Score: ".concat(counts);
       var r = canvas.getBoundingClientRect(),
       x = e.clientX - r.left,
       y = e.clientY - r.top;
@@ -149,11 +153,20 @@ $( "#draggable" ).draggable({
       containment:'#game'
     });
   }
+
+
 reloadVar = document.getElementById("reload");
 reloadVar.onclick = reload;
 function reload()
 {
-    //The data to be posted is path;
+  var data = {"path": path,
+              "layout_id": window.current_id,
+              "distance":  100,
+              "area": 98
+              };
+  $.post("/api/latest/path/"+window.current_id, data={"data": JSON.stringify(data)}).then(function(res){
+    console.log(res);
+  });
 }
 
 function calculate_percentage_convered(){
@@ -180,12 +193,12 @@ function calculate_black_area(){
 
 var done = 0;
 function drawObstacles(){
-  for(var i=0; i<obstacles.length; i++){
-    if(_.has(obstacles[i], "circle")){
-      drawCircle(obstacles[i]);
+  for(var i=0; i<window.obstacles.length; i++){
+    if(_.has(window.obstacles[i], "circle")){
+      drawCircle(window.obstacles[i]);
     }
-    if(_.has(obstacles[i], "box")){
-      drawBox(obstacles[i]);
+    if(_.has(window.obstacles[i], "box")){
+      drawBox(window.obstacles[i]);
     }
   }
 
@@ -231,13 +244,6 @@ function drawBox(obstacle){
 }
 
 
-/*var obstacles = [
-  {"circle": {"radius": 10, "center": {"x": 100, "y": 200}}},
-  {"circle": {"radius": 50, "center": {"x": 600, "y": 350}}},
-  {"box": {"x": 800, "y": 30, "length": 100, "width": 50}}
-]*/
-
+//var obstacles = [{"box": {"y": 409, "width": 15, "length": 63, "x": 176}}, {"circle": {"radius": 23, "center": {"y": 439, "x": 502}}}, {"box": {"y": 271, "width": 148, "length": 57, "x": 364}}, {"circle": {"radius": 78, "center": {"y": 343, "x": 722}}}, {"circle": {"radius": 21, "center": {"y": 310, "x": 454}}}];
 
 //$("#b01").click();
-
-var obstacles = [{"box": {"y": 409, "width": 15, "length": 63, "x": 176}}, {"circle": {"radius": 23, "center": {"y": 439, "x": 502}}}, {"box": {"y": 271, "width": 148, "length": 57, "x": 364}}, {"circle": {"radius": 78, "center": {"y": 343, "x": 722}}}, {"circle": {"radius": 21, "center": {"y": 310, "x": 454}}}];

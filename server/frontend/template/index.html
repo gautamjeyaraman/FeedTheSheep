@@ -24,10 +24,12 @@
 
   <body style="font-size: 20px;">
 
-    <button id="b01">Play "beer_can_opening"</button>
-    <button id="b02">Play "bell_ring"</button>
     <div id="welcome_page" class="show home_page_image">
-      <a href="javascript:void(0);" onclick="javascrpt:start_game();" class="start_button">Start</a>
+      <div class="stages">
+        {% for i in range(1, len(_ids)+1) %}
+        <button onclick="javascript:start_game({{_ids[i-1][0]}});" class="start_button">{{i}}</a>
+        {% end %}
+      </div>
     </div>
     <div id="game_starts" class="hide game_page">
 
@@ -41,13 +43,13 @@
     <div class="container-fluid">
       <div class="blog-header">
         <div class="row">
-          
-          <div id="game" class="canvas_wrapper">
+          <div id="game" class="col-xs-12 col-md-8 canvas_wrapper">
 	  <div id="draggable" class="draggable ui-widget ui-widget-content">
 	  <img src="/static/images/sheep123.png" id="sheep"/>
 	  </div>
             <canvas id="canvas" width=900 height=500></canvas>
           </div>
+          <div id="score" class="col-xs-6 col-md-4">Score: 0</div>
 
           <div id="hidden_game" class="canvas_wrapper hide">
             <canvas id="hidden_canvas" width=900 height=500></canvas>
@@ -56,7 +58,7 @@
         </div><!-- /.row -->
       </div><!-- /.blog-header -->
     </div><!-- /.container -->
-	<input type="button" value="Reload" id="reload" > 
+	  <input type="button" value="Reload" id="reload" >
 
     </div><!-- game_starts -->
     

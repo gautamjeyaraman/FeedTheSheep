@@ -17,3 +17,15 @@ class PostgresDatabase(object):
     def rm_all_layout(self):
     	return self.connection.runQuery(
     		query._RM_LAYOUT)
+
+    def get_all_layouts(self):
+    	return self.connection.runQuery(
+    		query._GET_ALL_LAYOUT_IDS)
+
+    def get_layout(self, number):
+    	return self.connection.runQuery(
+    		query._GET_LAYOUT, (number, ))
+
+    def get_path(self, number):
+    	return self.connection.runQuery(
+    		query._GET_PATH, (number, ))
