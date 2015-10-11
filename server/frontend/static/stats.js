@@ -30,7 +30,6 @@ function iterateOverPoints(path){
 		var endX = path[i][0];
 		var endY = path[i][1];
 		var amount = 0;
-		console.log(path[i]);
 /*		setInterval(function() {
 		    amount += 0.05; // change to alter duration
 		    if (amount > 1) amount = 1;
