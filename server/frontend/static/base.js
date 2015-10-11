@@ -23,7 +23,7 @@ var hidden_ctx = hidden_canvas.getContext("2d"),radius = 40;
 
 function initFunc(){
   foreground.onload = initload;
-  foreground.src = "/static/images/foreground.png";
+  foreground.src = "/static/images/foreground10.png";
 }
 
 
@@ -228,7 +228,7 @@ function drawCircle(obstacle){
       done += 1;
     if(done > 1){
       background.onload = setup;
-      background.src = "/static/images/background.png"
+      background.src = "/static/images/background4.png"
     }
   }
   img.src = "/static/images/obs.png";
@@ -244,7 +244,7 @@ function drawBox(obstacle){
     done += 1;
     if(done > 1){
       background.onload = setup;
-      background.src = "/static/images/background.png"
+      background.src = "/static/images/background4.png"
     }
   }
   img.src = "/static/images/obs.png";
