@@ -15,6 +15,8 @@ function start_game(_id){
                 document.getElementById("highestScore").innerHTML= "LeastDistanceTravelled: ".concat(window.distance);
                 document.getElementById("score").innerHTML= "DistanceTravelled: ".concat(0);
                 $('#percentage_completed').html(0);
+                $('#levelNumber').html(window.current_id);
+                console.log(window.current_id);
                 $('#draggable').css("left", "15px");
                 $('#draggable').css("top", "0px");
 

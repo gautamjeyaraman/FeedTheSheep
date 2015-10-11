@@ -15,7 +15,7 @@ var initial_percentage = 100;
 var ctx = canvas.getContext("2d"),
     foreground = new Image,
     background = new Image,
-    radius = 50;
+    radius = 40;
     var counts = 0;
 
 var area_without_obstacles = 0;
@@ -207,9 +207,15 @@ function submitSolutionFunction()
   
               if(window.distance==0 || window.area < coveredArea || (window.area == coveredArea && window.distance>counts))
               {
+                alert("You have successfully obtained a new high score");
                 $.post("/api/latest/path/"+window.current_id, data={"data": JSON.stringify(data)}).then(function(res){
                 console.log(res);
               });
+        }
+        else
+        {
+            alert("You need to try harder to win or click reset to try again fresh");
+
         }
 }
 
