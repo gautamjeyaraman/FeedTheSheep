@@ -2,12 +2,12 @@
 
 ## How to play the game
 ###Choose a layout
-![alt tag](http://github.com/gautamjeyaraman/FeedTheSheep/tree/master/screen_shots/1.png "Layout Select")
+![alt text](https://raw.githubusercontent.com/gautamjeyaraman/FeedTheSheep/master/screen_shots/1.png "Layout Select")
 -You can choose the layout you want to explore from this page.
 
 
 ###Rules of the game:
-![alt text](https://github.com/gautamjeyaraman/FeedTheSheep/tree/master/screen_shots/2.png "Game")
+![alt text](https://raw.githubusercontent.com/gautamjeyaraman/FeedTheSheep/master/screen_shots/2.png "Game")
 - You are a sheep, very hungry and want to eat as much as possible without tiring yourself.
 - Be careful, you might hit an obstacle and get hurt. You are no superman to run over them.
 - You may become one by having grass.
@@ -15,7 +15,7 @@
 
 ###How to win:
 ######**More the grass you eat, stronger you become. More the distance you travel, more tired you become.**
-![alt text](https://github.com/gautamjeyaraman/FeedTheSheep/tree/master/screen_shots/4.png "Winner")
+![alt text](https://raw.githubusercontent.com/gautamjeyaraman/FeedTheSheep/master/screen_shots/4.png "Winner")
 
 - So, you win if the percentage of area covered by you is greater than the previous high scorer.
 If its the same we consider the distance you have travelled
@@ -28,10 +28,10 @@ If its the same we consider the distance you have travelled
 
 ## Solutions page
 ######**Hurray!!! You have successfully played a game and helped solve a real time problem.**
-![alt text](https://github.com/gautamjeyaraman/FeedTheSheep/tree/master/screen_shots/4.png "Layout Select for Solutions")
+![alt text](https://raw.githubusercontent.com/gautamjeyaraman/FeedTheSheep/master/screen_shots/4.png "Layout Select for Solutions")
 - You can select the layout and find the best solution
 
-![alt text](https://github.com/gautamjeyaraman/FeedTheSheep/tree/master/screen_shots/5.png "Solutions")
+![alt text](https://raw.githubusercontent.com/gautamjeyaraman/FeedTheSheep/master/screen_shots/5.png "Solutions")
 
 The layout shows the area covered by using this solution, the path taken and the distance travelled. It shows the obstacle. In future this input can be given to robots for Room Exploration.
 
