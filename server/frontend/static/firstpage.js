@@ -23,9 +23,11 @@ function stats_onload()
 function renderBestLayout(number)
 {
 	$.get("/api/latest/path/"+number).then(function(res){
-              	if(res.success)
-              	{
+                if(res.success)
+                {
                 alert(res.path);
+                path=res.path;
+                iterateOverPoints(path);
             }
        });
 
