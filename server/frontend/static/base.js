@@ -116,6 +116,10 @@ $( "#draggable" ).draggable({
           x = e.clientX - r.left,
           //y = ui.position.top+radius;//
           y = e.clientY - r.top;
+          if(x<20)x = 20;
+          if(x>880)x = 880;
+          if(y<20)y=20;
+          if(y>480)y=480;
           var newTop = ui.position.top;
           var newLeft = ui.position.left;
           for(var i=0;i<obstacles.length;i++)
