@@ -233,7 +233,7 @@ function drawCircle(obstacle){
       background.src = "/static/images/background4.png"
     }
   }
-  img.src = "/static/images/obs.png";
+  img.src = "/static/images/pokemonrock4.png";
 }
 
 function drawBox(obstacle){
@@ -249,7 +249,7 @@ function drawBox(obstacle){
       background.src = "/static/images/background4.png"
     }
   }
-  img.src = "/static/images/obs.png";
+  img.src = "/static/images/pokemonrock4.png";
 }
 function touchHandler(event)
 {
