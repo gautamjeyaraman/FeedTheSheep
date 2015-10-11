@@ -2,7 +2,7 @@
 
 ## How to play the game
 ###Choose a layout
-![alt text](http://github.com/gautamjeyaraman/FeedTheSheep/tree/master/screen_shots/1.png "Layout Select")
+![alt tag](http://github.com/gautamjeyaraman/FeedTheSheep/tree/master/screen_shots/1.png "Layout Select")
 -You can choose the layout you want to explore from this page.
 
 
