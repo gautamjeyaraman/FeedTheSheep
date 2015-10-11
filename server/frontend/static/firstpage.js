@@ -32,14 +32,3 @@ function stats_onload()
 {
 		window.location.href = '/stats/' + window.current_id;
 }
-function renderBestLayout(number)
-{
-	$.get("/api/latest/path/"+number).then(function(res){
-                if(res.success)
-                {
-                path=res.path;
-                iterateOverPoints(path);
-            }
-       });
-
-}

@@ -14,14 +14,14 @@ function initFunc(){
 
 function initload(){
 	ctx.strokeStyle = ctx.createPattern(img, "repeat");
-	console.log("3");
+
 }
 
 
 //$(document).ready(function(){iterateOverPoints();});
 function iterateOverPoints(path){
 	path = JSON.parse(path);
-
+	
 
 	for (i=1; i<path.length; i++){
 
@@ -49,4 +49,50 @@ function iterateOverPoints(path){
 		ctx.stroke();
 
 	}
+}
+function drawObstacles(){
+  for(var i=0; i<window.obstacles.length; i++){
+    if(_.has(window.obstacles[i], "circle")){
+      drawCircle(window.obstacles[i]);
+    }
+    if(_.has(window.obstacles[i], "box")){
+      drawBox(window.obstacles[i]);
+    }
+  }
+
+}
+
+function drawCircle(obstacle){
+  obstacle = obstacle.circle;
+    ctx.beginPath();
+    ctx.moveTo(obstacle.center.x + obstacle.radius, obstacle.center.y);
+    ctx.arc(obstacle.center.x, obstacle.center.y, obstacle.radius, 0, 2*Math.PI);
+    ctx.fillStyle="red";
+    ctx.fill();
+}
+
+function drawBox(obstacle){
+	alert("Creating box");
+  obstacle = obstacle.box;
+    ctx.fillStylei="red";
+    ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.length);
+    
+}
+function renderBestLayout(number)
+{
+	window.current_id=number;
+	$.get("/api/latest/getlayout/"+window.current_id).then(function(res){
+		window.obstacles = JSON.parse(res.layout);
+	});
+	$.get("/api/latest/path/"+number).then(function(res){
+                if(res.success)
+                {
+                path=res.path;
+                $('#highest_percentage_completed').html(res.area);
+                document.getElementById("highestScore").innerHTML= "LeastDistanceTravelled: ".concat(res.distance);
+                iterateOverPoints(path);
+                drawObstacles();
+            }
+       });
+
 }
