@@ -3,22 +3,12 @@
 
 var path = [];
 
-var canvas = document.getElementById('canvas');
-var hidden_canvas = document.getElementById('hidden_canvas');
-
-var x_length = 900;
-var y_length = 500;
-var black_area = 0;
-var initial_percentage = 100;
-
-
 var ctx = canvas.getContext("2d"),
     foreground = new Image,
     background = new Image,
     radius = 40;
+    var counts = 0;
 
-var area_without_obstacles = 0;
-var hidden_ctx = hidden_canvas.getContext("2d"),radius = 40;
 function initFunc(){
   foreground.onload = initload;
   foreground.src = "/static/images/foreground.png";
@@ -27,13 +17,9 @@ function initFunc(){
 
 function initload(){
   ctx.fillStyle = ctx.createPattern(foreground, "repeat");
-  ctx.fillRect(0,0,x_length,y_length);
+  ctx.fillRect(0,0,900,500);
   drawObstacles();
-
-    hidden_ctx.fillStyle = "white";
-    hidden_ctx.fill();
-    hidden_ctx.fillStyle = "black";
-
+  
   //$(document).ready(ion.sound.play("voice_of_birds"));
 }
 $(document).ready(function(){playSounds();});
@@ -72,9 +58,7 @@ function setup() {
   
 
   var mouseDown = 0;
-
-    initial_percentage = 100 - calculate_area();
-  /*canvas.onmousedown = function() {
+  /*canvas.onmousedown = function() { 
     ++mouseDown;
   }
   canvas.onmouseup = function() {
@@ -102,7 +86,6 @@ $( "#draggable" ).mouseup(function(){
 });
 $( "#draggable" ).draggable({
       drag: function(e) {
-          hidden_ctx.getImageData(0, 0, x_length, y_length).data; // A small hack to make the calculation faster. Dont delete this file
 	if(mouseDown == 1)
 	{
       counts++;
@@ -144,14 +127,9 @@ $( "#draggable" ).draggable({
     
       ctx.beginPath();
       ctx.moveTo(x + radius, y);
-      hidden_ctx.moveTo(x + radius, y);
       ctx.arc(x, y, radius, 0, 2*Math.PI);
-      hidden_ctx.arc(x, y, radius, 0, 2*Math.PI);
       ctx.fill();
-      hidden_ctx.fill();
-      }
-          $('#percentage_completed').html(calculate_percentage_covered());
-      },
+      }},
       containment:'#game'
     });
   }
@@ -171,28 +149,6 @@ function reload()
   });
 }
 
-function calculate_percentage_covered(){
-    var new_black_area = calculate_area();
-    return Math.floor(100*(new_black_area - (100-initial_percentage))/initial_percentage);
-}
-
-function calculate_area(){
-    var black = calculate_black_area();
-    var covered_area = 10*100*black/(x_length*y_length);
-    return covered_area;
-}
-
-function calculate_black_area(){
-    black_area = 0;
-    var pixels = hidden_ctx.getImageData(0, 0, x_length, y_length).data;
-    console.log(pixels.length);
-    for(var counter= 0, length = pixels.length; counter < length; counter += 40){
-            if(pixels[counter+3] == 255){
-                black_area = black_area + 1;
-            }
-    }
-    return black_area;
-}
 
 var done = 0;
 function drawObstacles(){
@@ -216,11 +172,6 @@ function drawCircle(obstacle){
     ctx.moveTo(obstacle.center.x + radius, obstacle.center.y);
     ctx.arc(obstacle.center.x, obstacle.center.y, obstacle.radius, 0, 2*Math.PI);
     ctx.fill();
-
-    hidden_ctx.moveTo(obstacle.center.x + radius, obstacle.center.y);
-    hidden_ctx.arc(obstacle.center.x, obstacle.center.y, obstacle.radius, 0, 2*Math.PI);
-    hidden_ctx.fill();
-
     done += 1;
     if(done > 1){
       background.onload = setup;
@@ -236,7 +187,6 @@ function drawBox(obstacle){
   img.onload = function(){
     ctx.fillStyle = ctx.createPattern(img, "repeat");
     ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.length);
-    hidden_ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.length);
     done += 1;
     if(done > 1){
       background.onload = setup;
