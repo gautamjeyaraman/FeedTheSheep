@@ -15,7 +15,7 @@ var initial_percentage = 100;
 var ctx = canvas.getContext("2d"),
     foreground = new Image,
     background = new Image,
-    radius = 50;
+    radius = 40;
     var counts = 0;
 
 var area_without_obstacles = 0;
