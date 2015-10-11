@@ -15,11 +15,11 @@ var initial_percentage = 100;
 var ctx = canvas.getContext("2d"),
     foreground = new Image,
     background = new Image,
-    radius = 40;
+    radius = 50;
     var counts = 0;
 
 var area_without_obstacles = 0;
-var hidden_ctx = hidden_canvas.getContext("2d"),radius = 40;
+var hidden_ctx = hidden_canvas.getContext("2d");
 function initFunc(){
   foreground.onload = initload;
   foreground.src = "/static/images/foreground.png";
@@ -111,8 +111,8 @@ $( "#draggable" ).draggable({
           counts++;
           document.getElementById("score").innerHTML= "Score: ".concat(counts);
           var r = canvas.getBoundingClientRect(),
-          x = e.clientX - r.left,
-          y = e.clientY - r.top;
+          x = ui.position.left+radius;//e.clientX - r.left,
+          y = ui.position.top+radius;//e.clientY - r.top;
           var newTop = ui.position.top;
           var newLeft = ui.position.left;
           for(var i=0;i<obstacles.length;i++)
@@ -246,12 +246,12 @@ function drawCircle(obstacle){
   img.onload = function(){
     ctx.fillStyle = ctx.createPattern(img, "repeat");
     ctx.beginPath();
-    ctx.moveTo(obstacle.center.x + radius, obstacle.center.y);
+    ctx.moveTo(obstacle.center.x + obstacle.radius, obstacle.center.y);
     ctx.arc(obstacle.center.x, obstacle.center.y, obstacle.radius, 0, 2*Math.PI);
     ctx.fill();
 
     hidden_ctx.beginPath();
-    hidden_ctx.moveTo(obstacle.center.x + radius, obstacle.center.y);
+    hidden_ctx.moveTo(obstacle.center.x + obstacle.radius, obstacle.center.y);
     hidden_ctx.arc(obstacle.center.x, obstacle.center.y, obstacle.radius, 0, 2*Math.PI);
     hidden_ctx.fill();
 
