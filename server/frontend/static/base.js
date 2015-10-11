@@ -94,6 +94,9 @@ function setup() {
       ctx.fill();
     }
   };*/
+
+var oldCoords = {'top':0, 'left': 0};
+var obsFlag = false;
 $( "#draggable" ).mousedown(function(){
 	mouseDown = 1;
 
@@ -102,54 +105,87 @@ $( "#draggable" ).mouseup(function(){
 	mouseDown = 0;
 });
 $( "#draggable" ).draggable({
-      drag: function(e) {
-	if(mouseDown == 1)
-	{
-      counts++;
-      document.getElementById("score").innerHTML= "Score: ".concat(counts);
-      var r = canvas.getBoundingClientRect(),
-      x = e.clientX - r.left,
-      y = e.clientY - r.top;
-      for(var i=0;i<obstacles.length;i++)
-      {
-      	if(_.has(obstacles[i], "circle")){
-		obstacle = obstacles[i].circle;
-		var distance = Math.sqrt(Math.pow(obstacle.center.x - x,2) + Math.pow(obstacle.center.y - y,2));
-		var minimumDistance = obstacle.radius + radius;
-		if(distance < minimumDistance)
-		{
-			return false;
-		}
-	}
-	if(_.has(obstacles[i], "box")){
-	    obstacle = obstacles[i].box;
+      drag: function(e, ui) {
+        if(mouseDown == 1)
+        	{
+          counts++;
+          document.getElementById("score").innerHTML= "Score: ".concat(counts);
+          var r = canvas.getBoundingClientRect(),
+          x = e.clientX - r.left,
+          y = e.clientY - r.top;
+          var newTop = ui.position.top;
+          var newLeft = ui.position.left;
+          for(var i=0;i<obstacles.length;i++)
+          {
+          	if(_.has(obstacles[i], "circle")){
+          		obstacle = obstacles[i].circle;
+          		var distance = Math.sqrt(Math.pow(obstacle.center.x - x,2) + Math.pow(obstacle.center.y - y,2));
+          		var minimumDistance = obstacle.radius + radius;
+          		if(distance < minimumDistance)
+          		{
+                ui.position.top = oldCoords.top;
+                ui.position.left = oldCoords.left;
+                obsFlag = true;
+          			return;
+          		}
+          	}
+          	if(_.has(obstacles[i], "box")){
+        	    obstacle = obstacles[i].box;
 
-	    var distX = Math.abs(x - obstacle.x-obstacle.width/2);
-	    var distY = Math.abs(y - obstacle.y-obstacle.length/2);
+        	    var distX = Math.abs(x - obstacle.x-obstacle.width/2);
+        	    var distY = Math.abs(y - obstacle.y-obstacle.length/2);
 
-	    if (distX > (obstacle.width/2 + radius)) { continue; }
-	    if (distY > (obstacle.length/2 + radius)) { continue; }
+        	    if (distX > (obstacle.width/2 + radius)) { continue; }
+        	    if (distY > (obstacle.length/2 + radius)) { continue; }
 
 
-	    if (distX <= (obstacle.width/2)) { return false; } 
-	    if (distY <= (obstacle.length/2)) { return false; }
+        	    if (distX <= (obstacle.width/2)) {
+                ui.position.top = oldCoords.top;
+                ui.position.left = oldCoords.left;
+                obsFlag = true;
+                return;
+              } 
+        	    if (distY <= (obstacle.length/2)) {
+                ui.position.top = oldCoords.top;
+                ui.position.left = oldCoords.left; 
+                obsFlag = true;
+                return;
+              }
 
-	    var dx=distX-obstacle.width/2;
-	    var dy=distY-obstacle.length/2;
-	    if(dx*dx+dy*dy<=(radius*radius)){return false;}
-	}
-      }
+        	    var dx=distX-obstacle.width/2;
+        	    var dy=distY-obstacle.length/2;
+        	    if(dx*dx+dy*dy<=(radius*radius)){
+                ui.position.top = oldCoords.top;
+                ui.position.left = oldCoords.left;
+                obsFlag = true;
+                return;
+              }
+          	}
+          }
 
-      path.push([Math.floor(x),Math.floor(y)]);
-    
-      ctx.beginPath();
-      ctx.moveTo(x + radius, y);
-      hidden_ctx.moveTo(x + radius, y);
-      ctx.arc(x, y, radius, 0, 2*Math.PI);
-      hidden_ctx.arc(x, y, radius, 0, 2*Math.PI);
-      ctx.fill();
-      hidden_ctx.fill();
-      }},
+          var distance = Math.sqrt(Math.pow(oldCoords.left - x,2) + Math.pow(oldCoords.top - y,2));
+          if(distance > radius && obsFlag){
+            ui.position.top = oldCoords.top;
+            ui.position.left = oldCoords.left;
+            return;
+          }
+
+          oldCoords.left = newLeft;
+          oldCoords.top = newTop;
+          obsFlag = false;
+
+          path.push([Math.floor(x),Math.floor(y)]);
+        
+          ctx.beginPath();
+          hidden_ctx.beginPath();
+          ctx.moveTo(x + radius, y);
+          hidden_ctx.moveTo(x + radius, y);
+          ctx.arc(x, y, radius, 0, 2*Math.PI);
+          hidden_ctx.arc(x, y, radius, 0, 2*Math.PI);
+          ctx.fill();
+          hidden_ctx.fill();
+        }
+      },
       containment:'#game'
     });
   }
@@ -214,6 +250,7 @@ function drawCircle(obstacle){
     ctx.arc(obstacle.center.x, obstacle.center.y, obstacle.radius, 0, 2*Math.PI);
     ctx.fill();
 
+    hidden_ctx.beginPath();
     hidden_ctx.moveTo(obstacle.center.x + radius, obstacle.center.y);
     hidden_ctx.arc(obstacle.center.x, obstacle.center.y, obstacle.radius, 0, 2*Math.PI);
     hidden_ctx.fill();
