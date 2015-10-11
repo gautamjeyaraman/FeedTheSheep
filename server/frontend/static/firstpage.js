@@ -1,4 +1,5 @@
-function start_game(_id){
+function start_game(_id,levelNumber){
+  $('#levelNumber').html(levelNumber);
 	window.obstacles = [];
   if(_id !== undefined)
   {
@@ -15,7 +16,6 @@ function start_game(_id){
                 document.getElementById("highestScore").innerHTML= window.distance + " steps";
                 document.getElementById("score").innerHTML= 0;
                 $('#percentage_completed').html(0);
-                $('#levelNumber').html(window.current_id);
                 console.log(window.current_id);
                 $('#draggable').css("left", "15px");
                 $('#draggable').css("top", "0px");

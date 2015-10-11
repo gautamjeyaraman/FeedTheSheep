@@ -25,13 +25,13 @@
   <body style="font-size: 20px;">
 
     <div id="welcome_page" class="show">
-    <input type = "button" value="Statistics Page" class="btn btn-info" onclick="javascript:statistics_page()">
+    <input type = "button" value="Statistics Page" class="btn btn-primary" onclick="javascript:statistics_page()"  id="statistics_page">
 
       <h1 class="game_name">Sheep Intelligence</h1>
       <div class="graze_page_image"></div>
       <div class="stages">
         {% for i in range(1, len(_ids)+1) %}
-        <button onclick="javascript:start_game({{_ids[i-1][0]}});" class="start_button">{{i}}</button>
+        <button onclick="javascript:start_game({{_ids[i-1][0]}},{{i}});" class="start_button">{{i}}</button>
         {% end %}
       </div>
     </div>

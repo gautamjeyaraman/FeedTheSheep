@@ -23,10 +23,12 @@
 
 
 <body style="font-size: 20px;">
-    <input type = "button" value="Game" class="btn btn-info" onclick="javascript:main_menu()">
+    <input type = "button" value="Game Page" class="btn btn-primary" onclick="javascript:main_menu()" id="game_page">
 
 
 <div class="show ">
+
+    <h1 class="solutions_name">Solutions</h1>
     <div class="stats_page_image"></div>
     <div class="stats">
         {% for i in range(1, len(_ids)+1) %}
