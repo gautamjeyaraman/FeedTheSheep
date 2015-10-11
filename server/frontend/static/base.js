@@ -133,7 +133,9 @@ $( "#draggable" ).draggable({
       containment:'#game'
     });
   }
-/*reloadVar = document.getElementById("reload");
+
+
+reloadVar = document.getElementById("reload");
 reloadVar.onclick = reload;
 function reload()
 {
@@ -146,7 +148,8 @@ function reload()
     console.log(res);
   });
 }
-*/
+
+
 var done = 0;
 function drawObstacles(){
   for(var i=0; i<window.obstacles.length; i++){
