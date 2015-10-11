@@ -108,7 +108,7 @@ $( "#draggable" ).draggable({
 	if(mouseDown == 1)
 	{
       counts++;
-      document.getElementById("score").innerHTML= "Score: ".concat(counts+" " + window.distance);
+      document.getElementById("score").innerHTML= "DistanceTravelled: ".concat(counts);
       var r = canvas.getBoundingClientRect(),
       x = e.clientX - r.left,
       y = e.clientY - r.top;
@@ -159,9 +159,9 @@ $( "#draggable" ).draggable({
   }
 
 
-reloadVar = document.getElementById("reload");
-reloadVar.onclick = reload;
-function reload()
+submitSolution = document.getElementById("submitSolution");
+submitSolution.onclick = submitSolutionFunction;
+function submitSolutionFunction()
 {
   var coveredArea = calculate_percentage_covered();
   var data = {"path": path,

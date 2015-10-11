@@ -15,6 +15,7 @@ def munge_route_list(rl):
 
 routes = munge_route_list([
     URLSpec(r'/', views.IndexHandler, name='home'),
+    URLSpec(r'/stats_home', views.StatsHomeHandler, name='stats_home'),
     URLSpec(r'/stats/(.*)', views.StatsHandler, name="stats"),
     
     URLSpec(r'/api/latest/path/(.*)', api.PathHandler),
