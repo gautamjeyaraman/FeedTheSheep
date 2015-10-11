@@ -12,5 +12,5 @@ class IndexHandler(cyclone.web.RequestHandler, DatabaseMixin):
         
 class StatsHandler(cyclone.web.RequestHandler):
 
-    def get(self):
-        self.render("stats.html")
+    def get(self, number):
+        self.render("stats.html", number=number)

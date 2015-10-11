@@ -19,3 +19,6 @@ _GET_LAYOUT =\
 
 _GET_PATH =\
 	'SELECT * FROM path WHERE layout_id=%s;'
+_UPDATE_PATH =\
+    'UPDATE path set path_coords=%s, distance=%s, area=%s WHERE layout_id=%s'\
+    ' RETURNING id'

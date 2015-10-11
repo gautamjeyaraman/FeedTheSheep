@@ -34,6 +34,8 @@ class PathHandler(APIBase):
                                                'path': path[2],
                                                'distance': path[3],
                                                'area': path[4]}))
+        else:
+            defer.returnValue(self.write_json({'success':False}))
 
     @defer.inlineCallbacks
     def post(self, number):
@@ -42,8 +44,11 @@ class PathHandler(APIBase):
         layout_id = data["layout_id"]
         distance = data["distance"]
         area = data["area"]
-
-        path = yield self.database.insert_path(path, layout_id, distance, area)
+        dbPath = yield self.database.get_path(number)
+        if dbPath:
+            path = yield self.database.update_path(path, layout_id, distance, area)
+        else:
+            path = yield self.database.insert_path(path, layout_id, distance, area)
 
         defer.returnValue(self.write_json({'success': True}))
 
