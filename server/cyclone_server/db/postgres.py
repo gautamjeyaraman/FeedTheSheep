@@ -29,3 +29,6 @@ class PostgresDatabase(object):
     def get_path(self, number):
     	return self.connection.runQuery(
     		query._GET_PATH, (number, ))
+    def update_path(self, path, layout_id, distance, area):
+        return self.connection.runQuery(
+            query._UPDATE_PATH, (json.dumps(path), distance, area, layout_id))

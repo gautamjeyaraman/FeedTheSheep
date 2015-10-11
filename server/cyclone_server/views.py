@@ -8,9 +8,17 @@ class IndexHandler(cyclone.web.RequestHandler, DatabaseMixin):
     def get(self):
     	_ids = yield self.database.get_all_layouts()
         self.render("index.html", _ids=_ids)
-        
+
+
+class StatsHomeHandler(cyclone.web.RequestHandler, DatabaseMixin):
+    @defer.inlineCallbacks
+    def get(self):
+    	_ids = yield self.database.get_all_layouts()
+        self.render("stats_home.html", _ids=_ids)
+
+
         
 class StatsHandler(cyclone.web.RequestHandler):
 
-    def get(self):
-        self.render("stats.html")
+    def get(self, number):
+        self.render("stats.html", number=number)

@@ -6,13 +6,35 @@
 	display: block;
 }
 
+.stats_page_image{
+    background-image: url("/static/images/stats_home2.png");
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat; background-size: 100% 100%;
+
+    filter: alpha(opacity=30);
+    filter: progid: DXImageTransform.Microsoft.Alpha(opacity=30);
+    -moz-opacity: 0.30;
+    opacity: 0.3;
+    z-index: -1;
+}
+
 .home_page_image{
-    background-image: url("/static/images/sheep-05.jpg");
+    background-image: url("/static/images/home_bck.jpg");
     position: absolute; 
     top: 0; 
     left: 0; 
     height: 100%; 
     width: 100%;
+
+    /*filter: alpha(opacity=30);*/
+    /*filter: progid: DXImageTransform.Microsoft.Alpha(opacity=30);*/
+    /*-moz-opacity: 0.30;*/
+    /*opacity: 0.3;*/
+    z-index: -1;
 }
 
 .canvas_wrapper{
@@ -54,4 +76,11 @@
   width:400px;
   margin:auto;
   margin-top:20%;
+}
+
+.stats{
+    height:100px;
+    width:400px;
+    margin:auto;
+    margin-top:20%;
 }

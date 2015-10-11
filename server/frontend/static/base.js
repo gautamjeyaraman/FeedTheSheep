@@ -20,9 +20,10 @@ var ctx = canvas.getContext("2d"),
 
 var area_without_obstacles = 0;
 var hidden_ctx = hidden_canvas.getContext("2d");
+
 function initFunc(){
   foreground.onload = initload;
-  foreground.src = "/static/images/foreground.png";
+  foreground.src = "/static/images/foreground10.png";
 }
 
 
@@ -35,9 +36,10 @@ function initload(){
     hidden_ctx.fill();
     hidden_ctx.fillStyle = "black";
 
-  //$(document).ready(ion.sound.play("voice_of_birds"));
+    //$(document).ready(ion.sound.play("voice_of_birds"));
 }
 $(document).ready(function(){playSounds();});
+//$(document).ready(function(){init();});
 
 function playSounds(){
 
@@ -75,7 +77,7 @@ function setup() {
   var mouseDown = 0;
 
     initial_percentage = 100 - calculate_area();
-  /*canvas.onmousedown = function() {
+  /*canvas.onmousedown = function() { 
     ++mouseDown;
   }
   canvas.onmouseup = function() {
@@ -109,7 +111,7 @@ $( "#draggable" ).draggable({
         if(mouseDown == 1)
         	{
           counts++;
-          document.getElementById("score").innerHTML= "Score: ".concat(counts);
+          document.getElementById("score").innerHTML= "DistanceTravelled: ".concat(counts);
           var r = canvas.getBoundingClientRect(),
           x = ui.position.left+radius;//e.clientX - r.left,
           y = ui.position.top+radius;//e.clientY - r.top;
@@ -185,44 +187,51 @@ $( "#draggable" ).draggable({
           ctx.fill();
           hidden_ctx.fill();
         }
+        $('#percentage_completed').html(calculate_percentage_covered());
       },
       containment:'#game'
     });
   }
 
 
-reloadVar = document.getElementById("reload");
-reloadVar.onclick = reload;
-function reload()
+submitSolution = document.getElementById("submitSolution");
+submitSolution.onclick = submitSolutionFunction;
+function submitSolutionFunction()
 {
+  var coveredArea = calculate_percentage_covered();
   var data = {"path": path,
               "layout_id": window.current_id,
-              "distance":  100,
-              "area": 98
+              "distance":  counts,
+              "area": coveredArea
               };
-  $.post("/api/latest/path/"+window.current_id, data={"data": JSON.stringify(data)}).then(function(res){
-    console.log(res);
-  });
+  
+              if(window.distance==0 || window.area < coveredArea || (window.area == coveredArea && window.distance>counts))
+              {
+                $.post("/api/latest/path/"+window.current_id, data={"data": JSON.stringify(data)}).then(function(res){
+                console.log(res);
+              });
+        }
 }
 
-function calculate_percentage_convered(){
+function calculate_percentage_covered(){
     var new_black_area = calculate_area();
     return Math.floor(100*(new_black_area - (100-initial_percentage))/initial_percentage);
 }
 
 function calculate_area(){
     var black = calculate_black_area();
-    var covered_area = 100*100*black/(x_length*y_length);
+    var covered_area = 10*100*black/(x_length*y_length);
     return covered_area;
 }
 
 function calculate_black_area(){
     black_area = 0;
     var pixels = hidden_ctx.getImageData(0, 0, x_length, y_length).data;
-    for(var counter= 0, length = pixels.length; counter < length; counter += 400){
-            if(pixels[counter+3] == 255){
-                black_area = black_area + 1;
-            }
+    console.log(pixels.length);
+    for(var counter= 0, length = pixels.length; counter < length; counter += 40){
+        if(pixels[counter+3] == 255){
+            black_area = black_area + 1;
+        }
     }
     return black_area;
 }
@@ -255,13 +264,13 @@ function drawCircle(obstacle){
     hidden_ctx.arc(obstacle.center.x, obstacle.center.y, obstacle.radius, 0, 2*Math.PI);
     hidden_ctx.fill();
 
-    done += 1;
+      done += 1;
     if(done > 1){
       background.onload = setup;
-      background.src = "/static/images/background.png"
+      background.src = "/static/images/background4.png"
     }
   }
-  img.src = "/static/images/obs.png";
+  img.src = "/static/images/pokemonrock4.png";
 }
 
 function drawBox(obstacle){
@@ -274,12 +283,40 @@ function drawBox(obstacle){
     done += 1;
     if(done > 1){
       background.onload = setup;
-      background.src = "/static/images/background.png"
+      background.src = "/static/images/background4.png"
     }
   }
-  img.src = "/static/images/obs.png";
+  img.src = "/static/images/pokemonrock4.png";
 }
-
+function touchHandler(event)
+{
+    var touches = event.changedTouches,
+        first = touches[0],
+        type = "";
+         switch(event.type)
+    {
+        case "touchstart": type = "mousedown"; break;
+        case "touchmove":  type="mousemove"; break;        
+        case "touchend":   type="mouseup"; break;
+        default: return;
+    }
+ 
+    var simulatedEvent = document.createEvent("MouseEvent");
+    simulatedEvent.initMouseEvent(type, true, true, window, 1, 
+                              first.screenX, first.screenY, 
+                              first.clientX, first.clientY, false, 
+                              false, false, false, 0/*left*/, null);
+    first.target.dispatchEvent(simulatedEvent);
+    event.preventDefault();
+}
+ 
+function init() 
+{
+    document.addEventListener("touchstart", touchHandler, true);
+    document.addEventListener("touchmove", touchHandler, true);
+    document.addEventListener("touchend", touchHandler, true);
+    document.addEventListener("touchcancel", touchHandler, true);    
+}
 
 //var obstacles = [{"box": {"y": 409, "width": 15, "length": 63, "x": 176}}, {"circle": {"radius": 23, "center": {"y": 439, "x": 502}}}, {"box": {"y": 271, "width": 148, "length": 57, "x": 364}}, {"circle": {"radius": 78, "center": {"y": 343, "x": 722}}}, {"circle": {"radius": 21, "center": {"y": 310, "x": 454}}}];
 

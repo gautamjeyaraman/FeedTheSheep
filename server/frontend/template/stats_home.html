@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>FeedTheSheep</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="/static/bootstrap/jquery-ui.css" rel="stylesheet">
+    <link href="/static/bootstrap/gamify.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/bootstrap/base.css" rel="stylesheet">
+
+    <style type="text/css" id="holderjs-style"></style>
+</head>
+
+
+<body style="font-size: 20px;">
+
+<div class="show ">
+    <div class="stats_page_image"></div>
+    <div class="stats">
+        {% for i in range(1, len(_ids)+1) %}
+        <button onclick="javascript:get_stats({{_ids[i-1][0]}});" class="start_button">{{i}}</button>
+            {% end %}
+    </div>
+</div>
+
+<script src="/static/jquery-1.8.3.js"></script>
+<script src="/static/bootstrap/bootstrap.js"></script>
+<script src="/static/underscore.js"></script>
+<script src="/static/ion.sound.js"></script>
+<script src="/static/jquery-ui.js"></script>
+<script src="/static/stats.js"></script>
+<script src="/static/stats_page.js"></script>
+
+</body>
+
+</html>
