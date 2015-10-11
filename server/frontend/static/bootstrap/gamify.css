@@ -111,10 +111,21 @@ font-size: 80px;
 color: #4D9A4D;
 text-shadow: 5px 5px 0px #FFF;
 }
+.solutions_name{
+height: 10px;
+margin: auto;
+text-align: center;
+margin-top: 10%;
+font-weight: bold;
+font-family: "Helvetica Neue";
+font-size: 80px;
+color: #428bca;
+text-shadow: 5px 5px 0px #FFF;
+}
 
 .stats{
     height:100px;
     width:400px;
     margin:auto;
-    margin-top:20%;
+    margin-top:10%;
 }

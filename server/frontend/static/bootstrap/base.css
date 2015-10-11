@@ -4,6 +4,7 @@
 .draggable { display:inline;position:absolute }
 #containment-wrapper { width: 95%; height:150px; border:2px solid #ccc; padding: 10px; }
 #sheep {width:60px;height:60px;}
+#statistics_page, #game_page {position:absolute; top:500px; left:900px;}
 
 body {
   /*font-family: Georgia, "Times New Roman", Times, serif;*/
