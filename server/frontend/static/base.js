@@ -16,7 +16,7 @@ var ctx = canvas.getContext("2d"),
     foreground = new Image,
     background = new Image,
     radius = 30;
-    var counts = 0;
+window.counts = 0;
 
 var area_without_obstacles = 0;
 var hidden_ctx = hidden_canvas.getContext("2d");
@@ -110,7 +110,7 @@ $( "#draggable" ).draggable({
       drag: function(e, ui) {
         if(mouseDown == 1)
         	{
-          document.getElementById("score").innerHTML= counts;
+          document.getElementById("score").innerHTML= window.counts;
 
           var r = canvas.getBoundingClientRect(),
           //x = ui.position.left+radius;//
@@ -193,7 +193,7 @@ $( "#draggable" ).draggable({
           ctx.fill();
           hidden_ctx.fill();
 
-          counts++;
+          window.counts++;
         }
 
         var currArea = calculate_percentage_covered();
@@ -214,11 +214,11 @@ function submitSolutionFunction()
   var coveredArea = calculate_percentage_covered();
   var data = {"path": path,
               "layout_id": window.current_id,
-              "distance":  counts,
+              "distance":  window.counts,
               "area": coveredArea
               };
   
-              if(window.distance==0 || window.area < coveredArea || (window.area == coveredArea && window.distance>counts))
+              if(window.distance==0 || window.area < coveredArea || (window.area == coveredArea && window.distance>window.counts))
               {
                 alert("You have successfully obtained a new high score");
                 $.post("/api/latest/path/"+window.current_id, data={"data": JSON.stringify(data)}).then(function(res){

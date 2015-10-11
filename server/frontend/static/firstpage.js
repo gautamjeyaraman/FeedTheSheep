@@ -19,6 +19,7 @@ function start_game(_id,levelNumber){
                 console.log(window.current_id);
                 $('#draggable').css("left", "15px");
                 $('#draggable').css("top", "0px");
+                 window.counts = 0;
 
 
             }
