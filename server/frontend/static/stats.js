@@ -73,7 +73,7 @@ function drawCircle(obstacle){
 
 function drawBox(obstacle){
   obstacle = obstacle.box;
-    ctx.fillStylei="red";
+    ctx.fillStyle="red";
     ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.length);
     
 }
