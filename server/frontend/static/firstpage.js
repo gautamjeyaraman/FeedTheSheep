@@ -34,3 +34,13 @@ function stats_onload()
 {
 		window.location.href = '/stats/' + window.current_id;
 }
+function main_menu()
+{
+    window.location.href = '/';
+
+}
+function statistics_page()
+{
+
+    window.location.href = '/stats_home';
+}

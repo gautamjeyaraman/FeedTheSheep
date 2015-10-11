@@ -110,7 +110,6 @@ $( "#draggable" ).draggable({
       drag: function(e, ui) {
         if(mouseDown == 1)
         	{
-          counts++;
           document.getElementById("score").innerHTML= "DistanceTravelled: ".concat(counts);
           var r = canvas.getBoundingClientRect(),
           x = ui.position.left+radius;//e.clientX - r.left,
@@ -186,6 +185,8 @@ $( "#draggable" ).draggable({
           hidden_ctx.arc(x, y, radius, 0, 2*Math.PI);
           ctx.fill();
           hidden_ctx.fill();
+          
+          counts++;
         }
         $('#percentage_completed').html(calculate_percentage_covered());
       },
