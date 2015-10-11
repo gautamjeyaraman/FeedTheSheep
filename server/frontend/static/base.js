@@ -89,7 +89,7 @@ $( "#draggable" ).draggable({
 	if(mouseDown == 1)
 	{
       counts++;
-      document.getElementById("score").innerHTML= "Score: ".concat(counts);
+      document.getElementById("score").innerHTML= "Score: ".concat(counts+" " + window.distance);
       var r = canvas.getBoundingClientRect(),
       x = e.clientX - r.left,
       y = e.clientY - r.top;
@@ -141,12 +141,16 @@ function reload()
 {
   var data = {"path": path,
               "layout_id": window.current_id,
-              "distance":  100,
+              "distance":  counts,
               "area": 98
               };
-  $.post("/api/latest/path/"+window.current_id, data={"data": JSON.stringify(data)}).then(function(res){
-    console.log(res);
-  });
+  
+              if(window.distance==0 || window.distance>counts)
+              {
+                $.post("/api/latest/path/"+window.current_id, data={"data": JSON.stringify(data)}).then(function(res){
+                console.log(res);
+              });
+        }
 }
 
 
