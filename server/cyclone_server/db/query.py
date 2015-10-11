@@ -16,3 +16,6 @@ _GET_ALL_LAYOUT_IDS =\
 
 _GET_LAYOUT =\
 	'SELECT layout FROM layout WHERE id=%s;'
+
+_GET_PATH =\
+	'SELECT * FROM path WHERE layout_id=%s;'

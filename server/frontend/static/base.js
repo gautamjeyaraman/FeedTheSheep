@@ -134,7 +134,14 @@ reloadVar = document.getElementById("reload");
 reloadVar.onclick = reload;
 function reload()
 {
-    //The data to be posted is path;
+  var data = {"path": path,
+              "layout_id": window.current_id,
+              "distance":  100,
+              "area": 98
+              };
+  $.post("/api/latest/path/"+window.current_id, data={"data": JSON.stringify(data)}).then(function(res){
+    console.log(res);
+  });
 }
 
 var done = 0;

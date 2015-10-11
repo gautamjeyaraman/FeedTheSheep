@@ -21,12 +21,23 @@ class APIBase(cyclone.web.RequestHandler, DatabaseMixin):
         return self.write(json.dumps(d, sort_keys=True, indent=4))
 
 
-class SendPathHandler(APIBase):
+class PathHandler(APIBase):
 
     @defer.inlineCallbacks
-    def post(self):
-        data = json.loads(self.get_argument["data"])
+    def get(self, number):
+        path = yield self.database.get_path(number)
+        if path:
+            path = path[0]
+            defer.returnValue(self.write_json({'success': True,
+                                               'id': path[0],
+                                               'layout': path[1],
+                                               'path': path[2],
+                                               'distance': path[3],
+                                               'area': path[4]}))
 
+    @defer.inlineCallbacks
+    def post(self, number):
+        data = json.loads(self.get_argument("data"))
         path = data["path"]
         layout_id = data["layout_id"]
         distance = data["distance"]
@@ -43,7 +54,6 @@ class LayoutHandler(APIBase):
     def get(self, number):
         layout = yield self.database.get_layout(number)
         layout = layout[0][0]
-        print layout
         defer.returnValue(self.write_json({"layout": layout}))
 
 

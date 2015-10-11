@@ -25,3 +25,7 @@ class PostgresDatabase(object):
     def get_layout(self, number):
     	return self.connection.runQuery(
     		query._GET_LAYOUT, (number, ))
+
+    def get_path(self, number):
+    	return self.connection.runQuery(
+    		query._GET_PATH, (number, ))
