@@ -110,7 +110,8 @@ $( "#draggable" ).draggable({
       drag: function(e, ui) {
         if(mouseDown == 1)
         	{
-          document.getElementById("score").innerHTML= "DistanceTravelled: ".concat(counts);
+          document.getElementById("score").innerHTML= counts;
+
           var r = canvas.getBoundingClientRect(),
           //x = ui.position.left+radius;//
           x = e.clientX - r.left,
@@ -194,7 +195,12 @@ $( "#draggable" ).draggable({
 
           counts++;
         }
-        $('#percentage_completed').html(calculate_percentage_covered());
+
+        var currArea = calculate_percentage_covered();
+        $('#percentage_completed').html(currArea);
+        if(currArea >= window.area){
+          $(".highscore_blink").show();
+        }
       },
       containment:'#game'
     });

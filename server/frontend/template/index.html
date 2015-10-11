@@ -55,10 +55,25 @@
 	  </div>
             <canvas id="canvas" width=900 height=500></canvas>
           </div>
-          <div id="score" class="col-xs-4 col-md-4">DistanceTravelled: 0</div>
-          <div id="highestScore" class="col-xs-4 col-md-4">LeastDistTravelled : 0</div>
-          <div class="col-xs-4 col-md-4">AreaCompleted: <span id="percentage_completed">0</span>%</div>
-          <div class="col-xs-4 col-md-4">Maximum Area Completed: <span id="highest_percentage_completed">0</span>%</div>
+          <div style="position: fixed;top: 40%;right: 70px;text-align:center;text-shadow: 0 0 5px green;color: red;background-color: white;padding: 14px;">
+            <div style="font-size: 45px;"><span id="score">0</span></div>
+            steps
+          </div>
+          <div class="highscore_blink blink" style="right: 40px;top: 65%;">HIGH</div>
+          <div class="highscore_blink blink" style="right: 10px;top: 75%;">SCORE</div>
+
+          <div style="position: fixed;top: 40%;left: 30px;text-align:center;text-shadow: 0 0 5px green;color: red;background-color: white;padding: 14px;">
+            <div style="font-size: 45px;"><span id="percentage_completed">0</span>%</div>
+            completed
+          </div>
+
+          <div class="highscore_blink blink" style="left: 40px;top: 65%;">HIGH</div>
+          <div class="highscore_blink blink" style="left: 10px;top: 75%;">SCORE</div>
+
+          <div style="margin-left:300px;display:inline;">CURRENT HIGHSCORE:</div>
+          <div id="highestScore" style="display:inline;margin-left:20px;">  0 steps</div>
+          
+          <div style="margin-left:20px;display:inline;"><span id="highest_percentage_completed">0</span>% completed</div>
           <div id="hidden_game" class="canvas_wrapper hide">
             <canvas id="hidden_canvas" width=900 height=500></canvas>
             <div>

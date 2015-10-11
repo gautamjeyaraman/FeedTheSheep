@@ -12,8 +12,8 @@ function start_game(_id){
                 window.distance = res.distance;
                 window.area = res.area;
                 $('#highest_percentage_completed').html(window.area);
-                document.getElementById("highestScore").innerHTML= "LeastDistanceTravelled: ".concat(window.distance);
-                document.getElementById("score").innerHTML= "DistanceTravelled: ".concat(0);
+                document.getElementById("highestScore").innerHTML= window.distance + " steps";
+                document.getElementById("score").innerHTML= 0;
                 $('#percentage_completed').html(0);
                 $('#levelNumber').html(window.current_id);
                 console.log(window.current_id);
@@ -27,6 +27,7 @@ function start_game(_id){
 		window.obstacles = JSON.parse(res.layout);
 		$("#welcome_page").addClass("hide").removeClass("show");
 		$("#game_starts").removeClass("hide").addClass("show");
+		$(".highscore_blink").hide();
 		initFunc();
 	})
 }
