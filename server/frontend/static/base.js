@@ -103,6 +103,7 @@ $( "#draggable" ).mouseup(function(){
 });
 $( "#draggable" ).draggable({
       drag: function(e) {
+          hidden_ctx.getImageData(0, 0, x_length, y_length).data; // A small hack to make the calculation faster. Dont delete this file
 	if(mouseDown == 1)
 	{
       counts++;
@@ -149,7 +150,9 @@ $( "#draggable" ).draggable({
       hidden_ctx.arc(x, y, radius, 0, 2*Math.PI);
       ctx.fill();
       hidden_ctx.fill();
-      }},
+      }
+          $('#percentage_completed').html(calculate_percentage_covered());
+      },
       containment:'#game'
     });
   }
@@ -169,21 +172,22 @@ function reload()
   });
 }
 
-function calculate_percentage_convered(){
+function calculate_percentage_covered(){
     var new_black_area = calculate_area();
     return Math.floor(100*(new_black_area - (100-initial_percentage))/initial_percentage);
 }
 
 function calculate_area(){
     var black = calculate_black_area();
-    var covered_area = 100*100*black/(x_length*y_length);
+    var covered_area = 10*100*black/(x_length*y_length);
     return covered_area;
 }
 
 function calculate_black_area(){
     black_area = 0;
     var pixels = hidden_ctx.getImageData(0, 0, x_length, y_length).data;
-    for(var counter= 0, length = pixels.length; counter < length; counter += 400){
+    console.log(pixels.length);
+    for(var counter= 0, length = pixels.length; counter < length; counter += 40){
             if(pixels[counter+3] == 255){
                 black_area = black_area + 1;
             }
