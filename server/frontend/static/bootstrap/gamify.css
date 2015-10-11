@@ -37,6 +37,23 @@
     z-index: -1;
 }
 
+
+.graze_page_image{
+    background-image: url("/static/images/graze_bckgrnd4.png");
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat; background-size: 100% 100%;
+
+    filter: alpha(opacity=30);
+    filter: progid: DXImageTransform.Microsoft.Alpha(opacity=30);
+    -moz-opacity: 0.30;
+    opacity: 0.5;
+    z-index: -1;
+}
+
 .canvas_wrapper{
 	margin: auto;
 	height:500px;
@@ -75,7 +92,17 @@
   height:100px;
   width:400px;
   margin:auto;
-  margin-top:20%;
+  margin-top:10%;
+}
+
+.game_name{
+    height:10px;
+    width:300px !important;
+    margin:auto;
+    text-align: center;
+    margin-top:10%;
+    color: #777;
+    font-weight: normal;
 }
 
 .stats{

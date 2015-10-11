@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>FeedTheSheep</title>
+    <title>Sheep Intelligence</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/static/bootstrap/bootstrap.css" rel="stylesheet">
@@ -25,7 +25,8 @@
   <body style="font-size: 20px;">
 
     <div id="welcome_page" class="show">
-      <div class="home_page_image"></div>
+      <h1 class="game_name">Sheep Intelligence</h1>
+      <div class="graze_page_image"></div>
       <div class="stages">
         {% for i in range(1, len(_ids)+1) %}
         <button onclick="javascript:start_game({{_ids[i-1][0]}});" class="start_button">{{i}}</button>
@@ -34,10 +35,11 @@
     </div>
     <div id="game_starts" class="hide game_page">
 
+    <div class="graze_page_image"></div>
     <div class="blog-masthead">
       <div class="container">
-        <nav class="blog-nav">
-        </nav>
+        <!--<nav class="blog-nav">-->
+        <!--</nav>-->
       </div>
     </div>
 
