@@ -92,6 +92,12 @@ function renderBestLayout(number)
                 iterateOverPoints(path);
                 drawObstacles();
             }
+            else
+            {
+            	window.location.href='/stats_home';
+            	alert("No one has submitted a solution to this layout");
+
+            }
        });
 
 }
