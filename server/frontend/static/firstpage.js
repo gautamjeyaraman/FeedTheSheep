@@ -39,3 +39,8 @@ function main_menu()
     window.location.href = '/';
 
 }
+function statistics_page()
+{
+
+    window.location.href = '/stats_home';
+}
