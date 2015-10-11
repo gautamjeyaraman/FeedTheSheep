@@ -7,7 +7,6 @@ var ctx = canvas.getContext("2d"),
     foreground = new Image,
     background = new Image,
     radius = 40;
-    var counts = 0;
 
 function initFunc(){
   foreground.onload = initload;
