@@ -112,8 +112,10 @@ $( "#draggable" ).draggable({
         	{
           document.getElementById("score").innerHTML= "DistanceTravelled: ".concat(counts);
           var r = canvas.getBoundingClientRect(),
-          x = ui.position.left+radius;//e.clientX - r.left,
-          y = ui.position.top+radius;//e.clientY - r.top;
+          //x = ui.position.left+radius;//
+          x = e.clientX - r.left,
+          //y = ui.position.top+radius;//
+          y = e.clientY - r.top;
           var newTop = ui.position.top;
           var newLeft = ui.position.left;
           for(var i=0;i<obstacles.length;i++)
@@ -185,7 +187,7 @@ $( "#draggable" ).draggable({
           hidden_ctx.arc(x, y, radius, 0, 2*Math.PI);
           ctx.fill();
           hidden_ctx.fill();
-          
+
           counts++;
         }
         $('#percentage_completed').html(calculate_percentage_covered());
