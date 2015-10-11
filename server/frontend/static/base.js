@@ -14,6 +14,7 @@ function initFunc(){
   foreground.src = "/static/images/foreground.png";
 }
 
+
 function initload(){
   ctx.fillStyle = ctx.createPattern(foreground, "repeat");
   ctx.fillRect(0,0,900,500);
@@ -78,6 +79,7 @@ function setup() {
   };*/
 $( "#draggable" ).mousedown(function(){
 	mouseDown = 1;
+
 });
 $( "#draggable" ).mouseup(function(){
 	mouseDown = 0;
@@ -86,7 +88,8 @@ $( "#draggable" ).draggable({
       drag: function(e) {
 	if(mouseDown == 1)
 	{
-        counts++;
+      counts++;
+      document.getElementById("score").innerHTML= "Score: ".concat(counts);
       var r = canvas.getBoundingClientRect(),
       x = e.clientX - r.left,
       y = e.clientY - r.top;
@@ -130,7 +133,7 @@ $( "#draggable" ).draggable({
       containment:'#game'
     });
   }
-reloadVar = document.getElementById("reload");
+/*reloadVar = document.getElementById("reload");
 reloadVar.onclick = reload;
 function reload()
 {
@@ -143,7 +146,7 @@ function reload()
     console.log(res);
   });
 }
-
+*/
 var done = 0;
 function drawObstacles(){
   for(var i=0; i<window.obstacles.length; i++){
