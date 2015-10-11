@@ -162,13 +162,14 @@ reloadVar = document.getElementById("reload");
 reloadVar.onclick = reload;
 function reload()
 {
+  var coveredArea = calculate_percentage_covered();
   var data = {"path": path,
               "layout_id": window.current_id,
               "distance":  counts,
-              "area": calculate_percentage_covered()
+              "area": coveredArea
               };
   
-              if(window.distance==0 || window.area < covered_area || (window.area == covered_area && window.distance>counts))
+              if(window.distance==0 || window.area < coveredArea || (window.area == coveredArea && window.distance>counts))
               {
                 $.post("/api/latest/path/"+window.current_id, data={"data": JSON.stringify(data)}).then(function(res){
                 console.log(res);
