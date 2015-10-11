@@ -95,14 +95,21 @@
   margin-top:10%;
 }
 
+@font-face {
+    font-family: myFirstFont;
+    src: url(/static/CandyScript.ttf);
+}
+
 .game_name{
-    height:10px;
-    width:300px !important;
-    margin:auto;
-    text-align: center;
-    margin-top:10%;
-    color: #777;
-    font-weight: normal;
+height: 10px;
+margin: auto;
+text-align: center;
+margin-top: 10%;
+font-weight: normal;
+font-family: myFirstFont;
+font-size: 80px;
+color: #4D9A4D;
+text-shadow: 5px 5px 0px #FFF;
 }
 
 .stats{
